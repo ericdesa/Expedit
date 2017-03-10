@@ -1,12 +1,16 @@
 {
-    "RouteName": {
-        "URI": "routename/:param1/:optionalParam2?/:optionalParam3?/:optionalParam4?",
+    "Article": {
+        "URI": "article/:param1/:optionalParam2?/:optionalParam3?/:optionalParam4?",
         "requirements": {
             "param1": "\\d+",
             "optionalParam2": "\\d+",
             "optionalParam3": "\\d+",
             "optionalParam4": "\\d+"
         },
-        "controller": "MyViewController"
+        "controller": "ArticleVC"
+    },
+    "List": {
+        "URI": "list",
+        "controller": "ListVC"
     }
 }

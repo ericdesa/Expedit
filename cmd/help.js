@@ -9,7 +9,7 @@ var chalk = require('chalk');
 var _ = require('lodash');
 
 module.exports = {
-    help: function () {
+    print: function () {
         var Line = CLI.Line;
 
         var header = new Line()

@@ -19,13 +19,16 @@ var fs = require('fs');
 var files = require('./lib/files');
 
 // cmd
-var help = require('./cmd/help').help;
-var template = require('./cmd/template').template;
+var help = require('./cmd/help');
+var template = require('./cmd/template');
+var build = require('./cmd/build');
 
 
 // -------------------------
 
 clear();
+new CLI.Line().output();
+
 console.log(
     chalk.yellow(
         figlet.textSync('EXPEDIT', { horizontalLayout: 'full' })
@@ -40,7 +43,9 @@ console.log(
 
 var argv = parseArgs(process.argv);
 
-if (argv['help']) help();
-else if (argv['template']) template(argv['template']);
-else if (argv['input'] || argv['output']) build(argv['input'], argv['output'], argv['language']);
-else help();
+if (argv['help']) help.print();
+else if (argv['template']) template.createFile(argv['template']);
+else if (argv['input'] || argv['output']) build.build(argv['input'], argv['output'], argv['language']);
+else help.print();
+
+new CLI.Line().output();

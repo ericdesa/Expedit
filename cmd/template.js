@@ -14,7 +14,7 @@ var chalk = require('chalk');
 var _ = require('lodash');
 
 module.exports = {
-    template: function (output) {
+    createFile: function (output) {
         if (output) {
             var inputPath = path.join(__dirname, '..', './assets/json/template.json');
             var outputPath = path.join(__dirname, '..', output);
