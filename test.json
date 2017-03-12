@@ -3,9 +3,8 @@
         "URI": "article/:param1/:optionalParam2?/:optionalParam3?/:optionalParam4?",
         "requirements": {
             "param1": "\\d+",
-            "optionalParam2": "\\d+",
-            "optionalParam3": "\\d+",
-            "optionalParam4": "\\d+"
+            "optionalParam2": "abc",
+            "optionalParam3": "\\d{3}"
         },
         "controller": "ArticleVC"
     },
