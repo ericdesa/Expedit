@@ -29,8 +29,7 @@ class _RouteBase: NSObject {
     class func findRoute(_ path: String) -> _RouteBase? {
 
         let allRoutes = [
-            RouteArticle
-        ,RouteList
+            RouteRouteName
         
         ];
 
