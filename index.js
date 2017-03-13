@@ -32,7 +32,7 @@ console.log(
 
 var argv = parseArgs(process.argv);
 
-if (argv['help']) Help.print();
+if (argv['help']) help.print();
 else if (argv['template']) template.createFile(argv['template']);
 else if (argv['input'] || argv['output']) build(argv['input'], argv['output'], argv['language']);
 else help.print();
