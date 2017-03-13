@@ -11,17 +11,10 @@ var clear = require('clear');
 var figlet = require('figlet');
 var parseArgs = require('minimist')
 
-// utils
-var _ = require('lodash');
-
-// files
-var fs = require('fs');
-var files = require('./lib/files');
-
 // cmd
-var help = require('./cmd/help');
-var template = require('./cmd/template');
-var build = require('./cmd/build');
+var help = require('./src/cmd/help');
+var template = require('./src/cmd/template');
+var build = require('./src/cmd/build');
 
 
 // -------------------------
@@ -35,17 +28,13 @@ console.log(
     )
 );
 
-//var status = new Spinner('Authenticating you, please wait...');
-//status.start();
-//status.stop();
-
 // -------------------------
 
 var argv = parseArgs(process.argv);
 
-if (argv['help']) help.print();
+if (argv['help']) Help.print();
 else if (argv['template']) template.createFile(argv['template']);
-else if (argv['input'] || argv['output']) build.build(argv['input'], argv['output'], argv['language']);
+else if (argv['input'] || argv['output']) build(argv['input'], argv['output'], argv['language']);
 else help.print();
 
 new CLI.Line().output();

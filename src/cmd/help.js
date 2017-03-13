@@ -2,9 +2,6 @@
 var CLI = require('clui'),
     clc = require('cli-color');
 
-// console
-var chalk = require('chalk');
-
 // utils
 var _ = require('lodash');
 
