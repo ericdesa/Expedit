@@ -1,4 +1,7 @@
-// console
+/*jslint node: true, es6 */
+"use strict";
+
+// libs
 var chalk = require('chalk');
 
 

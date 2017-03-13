@@ -1,8 +1,10 @@
+/*jslint node: true, es6 */
+"use strict";
 
 // models
 var Parameter = require('./parameter');
 
-// utils
+// libs
 var _ = require('lodash');
 
 
@@ -13,9 +15,9 @@ function Route(name, json) {
 
     // parsed
     this.name = name;
-    this.URI = json["URI"];
-    this.controller = json["controller"];
-    this.parameterArray = []
+    this.URI = json.URI;
+    this.controller = json.controller;
+    this.parameterArray = [];
 
     // computed
     this.regex = "";
@@ -24,11 +26,10 @@ function Route(name, json) {
     var self = this;
     _.forEach(this.URI.split("/"), function (component) {
         if (component.indexOf(":") === 0) {
-            var name = component.replace(":", "").replace("?", "");
+            var parameterName = component.replace(":", "").replace("?", "");
             var isOptional = component.indexOf("?") !== -1;
-            var regex = ((json["requirements"] || [])[name] || ".*").split().join(); // to remove the double \ required by json
-            regex = regex.replace(".*", ".[^\/]*"); // exclude the parameter delimiter from the * regex
-            var parameter = new Parameter(name, isOptional, regex);
+            var paramRegex = ((json.requirements || [])[parameterName] || ".*").split().join(); // to remove the double \ required by json
+            var parameter = new Parameter(parameterName, isOptional, paramRegex);
             self.parameterArray.push(parameter);
         }
     });
@@ -37,7 +38,7 @@ function Route(name, json) {
 }
 
 
-// helpers
+// Public
 // -----------------------------
 
 Route.prototype.getRegex = function () {
@@ -47,27 +48,29 @@ Route.prototype.getRegex = function () {
     var regex = this.URI.split("/").map(function (component) {
         if (component.indexOf(":") === 0) {
             var name = component.replace(":", "").replace("?", "");
-            var param = self.parameterArray.find(function (param) { return param.name === name })
-            var regex = param.regex
-            forceOptional = param.isOptional
+            var param = self.parameterArray.find(function (currentParam) {
+                return currentParam.name === name;
+            });
+
+            var paramRegex = param.regex;
+            forceOptional = param.isOptional;
             if (forceOptional) {
-                nbBraceToClose++;
-                return '(\/' + regex
-            }
-            else {
-                return '\/' + regex
+                nbBraceToClose += 1;
+                return '(\/' + paramRegex;
+            } else {
+                return '\/' + paramRegex;
             }
         } else {
-            return component
+            return component;
         }
     }).join('');
 
-    for (i = 0; i < nbBraceToClose; i++) {
-        regex += ')?'
+    for (var i = 0; i < nbBraceToClose; i += 1) {
+        regex += ')?';
     }
 
     return ('\/?' + regex + '\/?');
-}
+};
 
 
 module.exports = Route;

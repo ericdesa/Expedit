@@ -1,9 +1,7 @@
-// file
-var fs = require('fs');
-var path = require('path');
+/*jslint node: true, es6 */
+"use strict";
 
 // utils
-var files = require('../utils/files');
 var log = require('../utils/log');
 
 

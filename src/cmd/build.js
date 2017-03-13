@@ -1,19 +1,25 @@
-// file
-var fs = require('fs');
-var path = require('path');
+/*jslint node: true, es6 */
+"use strict";
 
 // models
-var Route = require('../models/route')
-var Parameter = require('../models/parameter')
+var Route = require('../models/route'),
+    Parameter = require('../models/parameter');
 
 // builders
-var SwiftBuilder = require('../builders/SwiftBuilder.js')
-var HtmlBuilder = require('../builders/HtmlBuilder.js')
+var SwiftBuilder = require('../builders/SwiftBuilder.js'),
+    HtmlBuilder = require('../builders/HtmlBuilder.js');
 
 // utils
 var log = require('../utils/log');
-var _ = require('lodash');
 
+// libs
+var fs = require('fs'),
+    path = require('path'),
+    _ = require('lodash');
+
+
+// build implementation
+// -----------------------------
 
 function build(jsonFilePath, outputDirectory, language = "swift") {
     if (jsonFilePath === undefined) log.error("--input parameter is missing");

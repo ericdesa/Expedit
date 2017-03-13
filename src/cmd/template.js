@@ -1,10 +1,16 @@
-// file
-var files = require('../utils/files');
-var path = require('path');
+/*jslint node: true, es6 */
+"use strict";
 
 // utils
-var log = require('../utils/log');
+var log = require('../utils/log'),
+    files = require('../utils/files');
 
+// libs
+var path = require('path');
+
+
+// template implementation
+// -----------------------------
 
 module.exports = {
     createFile: function (output) {
@@ -13,10 +19,8 @@ module.exports = {
             var outputPath = path.join(__dirname, '..', output);
             files.copyFile(inputPath, outputPath);
             log.success("template created at " + outputPath + ", have fun !");
-        }
-
-        else {
+        } else {
             log.error("output parameter is missing");
         }
     }
-}
+};

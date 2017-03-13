@@ -1,5 +1,10 @@
-var fs = require('fs');
-var path = require('path');
+/*jslint node: true, es6 */
+"use strict";
+
+// libs
+var fs = require('fs'),
+    path = require('path');
+
 
 module.exports = {
     getCurrentDirectoryBase: function () {
@@ -16,15 +21,19 @@ module.exports = {
 
     copyFile: function (source, target) {
         return new Promise(function (resolve, reject) {
-            var rd = fs.createReadStream(source);
-            rd.on('error', rejectCleanup);
-            var wr = fs.createWriteStream(target);
-            wr.on('error', rejectCleanup);
+            var rd, wr;
+
             function rejectCleanup(err) {
                 rd.destroy();
                 wr.end();
                 reject(err);
             }
+
+            rd = fs.createReadStream(source);
+            rd.on('error', rejectCleanup);
+
+            wr = fs.createWriteStream(target);
+            wr.on('error', rejectCleanup);
             wr.on('finish', resolve);
             rd.pipe(wr);
         });
@@ -33,8 +42,11 @@ module.exports = {
     readFile: function (source) {
         return new Promise(function (resolve, reject) {
             fs.readFile(source, function read(err, data) {
-                if (err) reject(err);
-                else resolve(data);
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
             });
         });
     },

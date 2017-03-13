@@ -1,9 +1,14 @@
-// cli
-var CLI = require('clui'),
-    clc = require('cli-color');
+/*jslint node: true, es6 */
+"use strict";
 
-// utils
-var _ = require('lodash');
+// libs
+var CLI = require('clui'),
+    clc = require('cli-color'),
+    _ = require('lodash');
+
+
+// help implementation
+// -----------------------------
 
 module.exports = {
     print: function () {
@@ -19,7 +24,7 @@ module.exports = {
             ["--template", "create a json template (ex. ./assets/router.json)"],
             ["--input", "the router json (ex. ./assets/router.json)"],
             ["--output", "the output directory (ex. ./models/router)"],
-            ["--help", "show this (thank you captain obvious)"],
+            ["--help", "show this (thank you captain obvious)"]
         ];
 
         _.forEach(commands, function (item) {
