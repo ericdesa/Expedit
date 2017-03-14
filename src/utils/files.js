@@ -49,9 +49,13 @@ module.exports = {
 
     writeFile: function (content, target) {
         return createDirForPath(target).then(function () {
-        fs.writeFileSync(target, content);
+            fs.writeFileSync(target, content);
         });
     },
+
+    findFilesInDir: function (startPath, extension) {
+        return findFilesInDir(startPath, extension);
+    }
 };
 
 function createDirForPath(inputPath) {
@@ -70,4 +74,26 @@ function createDirForPath(inputPath) {
             resolve();
         });
     });
+}
+
+// from http://stackoverflow.com/a/25478516/1335962
+function findFilesInDir(startPath, extension) {
+    var results = [];
+
+    if (!fs.existsSync(startPath)) {
+        return;
+    }
+
+    var files = fs.readdirSync(startPath);
+    for (var i = 0; i < files.length; i++) {
+        var filename = path.join(startPath, files[i]);
+        var stat = fs.lstatSync(filename);
+        if (stat.isDirectory()) {
+            results = results.concat(findFilesInDir(filename, extension));
+        }
+        else if (filename.indexOf("." + extension) === (filename.length - extension.length - 1)) {
+            results.push(filename);
+        }
+    }
+    return results;
 }

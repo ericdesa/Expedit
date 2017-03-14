@@ -22,13 +22,23 @@ var fs = require('fs'),
 // -----------------------------
 
 function build(jsonFilePath, outputDirectory, language = "swift") {
-    if (jsonFilePath === undefined) log.error("--input parameter is missing");
-    else if (outputDirectory === undefined) log.error("--output parameter is missing");
-    else if (language === "objc") log.error("objc is not implemented");
-    else if (language === "html") log.error("html is not implemented");
-    else if (language !== "swift") log.error("--language value can be swift, objc or html");
+    if (jsonFilePath === undefined) {
+        log.error("--input parameter is missing");
+    } else if (outputDirectory === undefined) {
+        log.error("--output parameter is missing");
+    } else {
+        switch (language) {
+            case "objc":
+                log.error("objc is not implemented");
+                break;
+            case "swift":
+                break;
+            default:
+                log.error("--language value can be swift, objc or html");
+                break;
+        }
+    }
 
-    var self = this;
     var absoluteJsonFilePath = path.join(__dirname, '../..', jsonFilePath);
     var absoluteOutputPath = path.join(__dirname, '../..', outputDirectory);
 
