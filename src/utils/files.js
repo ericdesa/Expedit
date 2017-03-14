@@ -1,41 +1,37 @@
-/*jslint node: true, es6 */
+/* jslint node: true, es6, this */
 "use strict";
 
 // libs
 var fs = require('fs'),
-    path = require('path');
-
+    path = require('path'),
+    mkdirp = require('mkdirp');
 
 module.exports = {
     getCurrentDirectoryBase: function () {
         return path.basename(process.cwd());
     },
 
-    directoryExists: function (filePath) {
-        try {
-            return fs.statSync(filePath).isDirectory();
-        } catch (err) {
-            return false;
-        }
-    },
-
     copyFile: function (source, target) {
-        return new Promise(function (resolve, reject) {
-            var rd, wr;
+        var self = this;
 
-            function rejectCleanup(err) {
-                rd.destroy();
-                wr.end();
-                reject(err);
-            }
+        return createDirForPath(target).then(function () {
+            return new Promise(function (resolve, reject) {
+                var rd, wr;
 
-            rd = fs.createReadStream(source);
-            rd.on('error', rejectCleanup);
+                function rejectCleanup(err) {
+                    rd.destroy();
+                    wr.end();
+                    reject(err);
+                }
 
-            wr = fs.createWriteStream(target);
-            wr.on('error', rejectCleanup);
-            wr.on('finish', resolve);
-            rd.pipe(wr);
+                rd = fs.createReadStream(source);
+                rd.on('error', rejectCleanup);
+
+                wr = fs.createWriteStream(target);
+                wr.on('error', rejectCleanup);
+                wr.on('finish', resolve);
+                rd.pipe(wr);
+            });
         });
     },
 
@@ -52,6 +48,26 @@ module.exports = {
     },
 
     writeFile: function (content, target) {
+        return createDirForPath(target).then(function () {
         fs.writeFileSync(target, content);
-    }
+        });
+    },
 };
+
+function createDirForPath(inputPath) {
+    var path;
+    var components = inputPath.split('/');
+    var lastComponent = components[components.length - 1];
+
+    if (lastComponent.indexOf('.') !== -1) {
+        path = inputPath.replace(lastComponent, "");
+    } else {
+        path = inputPath;
+    }
+
+    return new Promise(function (resolve, reject) {
+        mkdirp(path, function (err) {
+            resolve();
+        });
+    });
+}

@@ -1,4 +1,4 @@
-/*jslint node: true, es6 */
+/*jslint node: true, es6, this */
 "use strict";
 
 // utils
@@ -36,6 +36,7 @@ SwiftBuilder.prototype.generateRouteFile = function (route) {
 
     var templatePath = path.join(__dirname, '../../templates/swift/human/Human.swift');
     var filePath = path.join(this.outputDirectory, 'human', 'Route' + route.name + '.swift');
+
     this.generateFileWithParameters(parameters, templatePath, filePath).then(function () {
 
         templatePath = path.join(__dirname, '../../templates/swift/machine/Machine.swift');

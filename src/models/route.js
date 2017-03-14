@@ -1,4 +1,4 @@
-/*jslint node: true, es6 */
+/* jslint node: true, es6, this */
 "use strict";
 
 // models
