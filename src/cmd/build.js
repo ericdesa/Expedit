@@ -32,6 +32,7 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
                 log.error("objc is not implemented");
                 break;
             case "swift":
+            case "html":
                 break;
             default:
                 log.error("--language value can be swift, objc or html");
