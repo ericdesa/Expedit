@@ -15,25 +15,31 @@ var path = require('path'),
 // -----------------------------
 
 function generateFile(inputPath, targetPath, routeArray, route = undefined) {
-    var components = targetPath.split("/");
-    var directoryName = components[components.length - 2];
-    var fileName = directoryName + "/" + components[components.length - 1];
+    var fileName = files.fileNameFromPath(targetPath);
+    var isHumanFile = route !== undefined && fileName.indexOf("_") === -1;
+    var isTargetFileExist = fs.existsSync(targetPath);
+
+    var parameter = {};
+    parameter.routeArray = routeArray;
+
+    if (route !== undefined) {
+        parameter.route = route;
+    }
 
     return files.readFile(inputPath).then(function (data) {
-        var parameter = {};
-        parameter.routeArray = routeArray;
-
-        if (route !== undefined) {
-            parameter.route = route;
-        }
-
         var compiled = _.template(data);
         var content = compiled(parameter);
-        return files.writeFile(content, targetPath);
-    }).then(function () {
-        log.success(" > " + fileName + " created");
-    }).catch(function (error) {
-        log.error(" > " + fileName + " failed: " + error);
+
+        if (isHumanFile && isTargetFileExist) {
+            log.fileKeeped(targetPath);
+        } else {
+            return files.writeFile(content, targetPath).then(function () {
+                if (isTargetFileExist) log.fileUpdated(targetPath);
+                else log.fileAdded(targetPath);
+            }).catch(function (error) {
+                log.error(targetPath + " failed: " + error);
+            });
+        }
     });
 }
 

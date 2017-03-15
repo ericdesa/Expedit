@@ -55,22 +55,35 @@ module.exports = {
 
     findFilesInDir: function (startPath, extension) {
         return findFilesInDir(startPath, extension);
+    },
+
+    fileNameFromPath: function (path) {
+        var components = path.split("/");
+        return components[components.length - 1];
+    },
+
+    fileNameWithDirectoryFromPath: function (path) {
+        var components = path.split("/");
+        var fileName = components[components.length - 1];
+        var directoryName = components[components.length - 2];
+        return "/" + directoryName + "/" + fileName;
     }
 };
 
 function createDirForPath(inputPath) {
-    var path;
+    var directoryToCreatePath;
     var components = inputPath.split('/');
     var lastComponent = components[components.length - 1];
+    var isLastComponentAFile = lastComponent.indexOf('.') !== -1;
 
-    if (lastComponent.indexOf('.') !== -1) {
-        path = inputPath.replace(lastComponent, "");
+    if (isLastComponentAFile) {
+        directoryToCreatePath = inputPath.replace(lastComponent, "");
     } else {
-        path = inputPath;
+        directoryToCreatePath = inputPath;
     }
 
     return new Promise(function (resolve, reject) {
-        mkdirp(path, function (err) {
+        mkdirp(directoryToCreatePath, function (err) {
             resolve();
         });
     });

@@ -35,7 +35,7 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
             case "html":
                 break;
             default:
-                log.error("--language value can be swift, objc or html");
+                log.error("--language can be swift, objc or html");
                 break;
         }
     }
@@ -60,10 +60,7 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
                 switch (language) {
                     case "swift": builder = new SwiftBuilder(absoluteOutputPath, routeArray); break;
                     case "html": builder = new HtmlBuilder(absoluteOutputPath, routeArray); break;
-                    default: log.error("ouais mais nan : " + language + " is not yet supported"); break;
                 }
-
-                log.success("\nDONE 🖕\n");
             } catch (error) {
                 log.error("An error occured : " + error);
             }
