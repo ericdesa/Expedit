@@ -2,7 +2,8 @@
 "use strict";
 
 // utils
-var files = require('../utils/files'),
+var fs = require('fs'),
+    files = require('../utils/files'),
     log = require('../utils/log');
 
 // libs
@@ -39,6 +40,7 @@ function generateFile(inputPath, targetPath, routeArray, route = undefined) {
 function generateFilesInTemplateDirectory(outputDirectory, routeArray, templateName, extension) {
     var rootPath = path.join(__dirname, '../../templates/' + templateName);
     var templateFilePathArray = files.findFilesInDir(rootPath, extension);
+    var fileCreatedArray = [];
 
     _.forEach(templateFilePathArray, function (inputPath) {
         var targetPath = outputDirectory + inputPath.replace(rootPath, "").replace("/", "");
@@ -46,12 +48,16 @@ function generateFilesInTemplateDirectory(outputDirectory, routeArray, templateN
         if (isRouteFile) {
             _.forEach(routeArray, function (route) {
                 var targetRoutePath = targetPath.replace("{{routeName}}", "Route" + route.name);
+                fileCreatedArray.push(targetRoutePath);
                 generateFile(inputPath, targetRoutePath, routeArray, route);
             });
         } else {
+            fileCreatedArray.push(targetPath);
             generateFile(inputPath, targetPath, routeArray);
         }
     });
+
+    return fileCreatedArray;
 }
 
 
