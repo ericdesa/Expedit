@@ -2,9 +2,10 @@
 "use strict";
 
 // cmd
+var build = require('./src/cmd/build');
 var help = require('./src/cmd/help');
 var template = require('./src/cmd/template');
-var build = require('./src/cmd/build');
+var version = require('./package.json').version;
 
 // libs
 var CLI = require('clui'),
@@ -16,9 +17,12 @@ var chalk = require('chalk'),
     figlet = require('figlet'),
     parseArgs = require('minimist');
 
-
 clear();
 new CLI.Line().output();
+
+console.log(
+    chalk.yellow('=====================================================')
+);
 
 console.log(
     chalk.yellow(
@@ -26,8 +30,13 @@ console.log(
     )
 );
 
+console.log(
+    chalk.yellow('=================== version', version, '===================')
+);
+
 
 var argv = parseArgs(process.argv);
+process.env.version = version;
 
 if (argv.help) help.print();
 else if (argv.template) template.createFile(argv.template);

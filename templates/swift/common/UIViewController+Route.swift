@@ -2,13 +2,16 @@
 import Foundation
 import UIKit
 
+var routeEntryKey: UInt8 = 0 // We still need this boilerplate
+
 extension UIViewController {
 
-    private var routeEntryKey: UInt8 = 0 // We still need this boilerplate
-
     var routeEntry: Route {
+
         get {
-            return associatedObject(base: self, key: &routeEntryKey)
+            return associatedObject(base: self, key: &routeEntryKey, initialiser: { () -> Route in
+                return Route()
+            })
         }
         set {
             associateObject(base: self, key: &routeEntryKey, value: newValue)
@@ -17,7 +20,11 @@ extension UIViewController {
 
     class func loadFromStoryboard(withRoute route: Route, andStoryboardName storyboardName: String = "Main") -> UIViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        let identifier = NSStringFromClass(self)
+
+        let className = NSStringFromClass(self)
+        let packageName = className.components(separatedBy: ".").first!
+        let identifier = className.replacingOccurrences(of: "\(packageName).", with: "")
+
         let vc = storyboard.instantiateViewController(withIdentifier: identifier)
         vc.routeEntry = route
         return vc

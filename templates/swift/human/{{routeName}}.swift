@@ -1,5 +1,5 @@
 import UIKit
 
-class <%- route.fileName %>: _<%- route.fileName %> {
+class <%= route.fileName %>: _<%= route.fileName %> {
 
 }

@@ -1,24 +1,51 @@
 import UIKit
 
-class _<%- route.fileName %>: RouteBase {
+class _<%= route.fileName %>: Route {
 
-    <%- route.parameterArray.map(function (param) { return 'var ' + param.name + ': String?' }).join(`
+    override var URI: String {
+        get {
+            return "<%= route.URI %>"
+        }
+    }
+
+    <%= route.parameterArray.map(function (param) { return 'var ' + param.name + ': String?' }).join(`
     `) %>
-
-    init(<%- route.parameterArray.map(function (param) { return param.name + ': String?' }).join(', ') %>) -> <%- route.fileName %> {
+    <% if (route.hasParameters()) { %>
+    init(<%= route.parameterArray.map(function (param) { return param.name + ': String?' }).join(', ') %>) {
         super.init()
-        <%- route.parameterArray.map(function (param) { return 'self.' + param.name + ' = ' + param.name }).join(`
+        <%= route.parameterArray.map(function (param) { return 'self.' + param.name + ' = ' + param.name }).join(`
+        `) %>
+    }<% } %>
+
+    <% if (route.controller !== undefined) { %>
+    override func viewController() -> UIViewController? {
+        return <%= route.controller %>.loadFromStoryboard(withRoute: self);
+    }
+    <% } %>
+    override class func isMatching(path: String) -> Bool {
+        var isMatching = false
+        if let matchRange = path.range(of: "<%= route.regex.split('\\').join('\\\\') %>", options: .regularExpression) {
+            isMatching = !path.substring(with: matchRange).isEmpty
+        }
+        return isMatching
+    }
+    <% if (route.hasParameters()) { %>
+    override func setParameters(fromPath path: String) -> Void {
+        let componentArray = path.components(separatedBy: "/")
+        <%= route.parameterArray.map(function (param) { return 'self.' + param.name + ' = componentArray[' + param.uriIndex + ']' }).join(`
         `) %>
     }
+    <% } %>
+    override func path() -> String {
+        <% if (route.hasParameters()) { %>var path = self.URI
+        <%= route.parameterArray.map(function (param) { return `if let ` + param.name + ` = self.` + param.name + ` { path = path.replacingOccurrences(of: ":` + param.name + `", with: ` + param.name + `) }` }).join(`
+        `)%>
 
-    override class func viewController() -> UIViewController? {
-        return <%- route.controller %>.loadFromStoryboard(withRoute: self);
-    }
-
-    override class func isMatching(path: String) -> Bool {
-        let pathRange = string.characters.indices
-        let matchRange = string.rangeOfString("<%- route.regex %>", options: .RegularExpressionSearch)
-        let isMatching = matchRange == pathRange
-        return isMatching
+        path = path
+            .replacingOccurrences(of: "?", with: "")
+            .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
+            .joined(separator: "/");
+        <% } else { %>let path = self.URI<% } %>
+        return path
     }
 }

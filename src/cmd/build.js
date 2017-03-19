@@ -56,10 +56,9 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
                     routeArray.push(route);
                 });
 
-                var builder;
                 switch (language) {
-                    case "swift": builder = new SwiftBuilder(absoluteOutputPath, routeArray); break;
-                    case "html": builder = new HtmlBuilder(absoluteOutputPath, routeArray); break;
+                    case "swift": new SwiftBuilder(absoluteOutputPath, routeArray); break;
+                    case "html": new HtmlBuilder(absoluteOutputPath, routeArray); break;
                 }
             } catch (error) {
                 log.error("An error occured : " + error);

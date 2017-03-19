@@ -24,12 +24,12 @@ function Route(name, json) {
     this.fileName = 'Route' + this.name;
 
     var self = this;
-    _.forEach(this.URI.split("/"), function (component) {
+    _.forEach(this.URI.split("/"), function (component, index) {
         if (component.indexOf(":") === 0) {
             var parameterName = component.replace(":", "").replace("?", "");
             var isOptional = component.indexOf("?") !== -1;
             var paramRegex = ((json.requirements || [])[parameterName] || ".*").split().join(); // to remove the double \ required by json
-            var parameter = new Parameter(parameterName, isOptional, paramRegex);
+            var parameter = new Parameter(parameterName, index, isOptional, paramRegex);
             self.parameterArray.push(parameter);
         }
     });
@@ -71,6 +71,10 @@ Route.prototype.getRegex = function () {
 
     return ('\/?' + regex + '\/?');
 };
+
+Route.prototype.hasParameters = function () {
+    return this.parameterArray.length > 0;
+}
 
 
 module.exports = Route;
