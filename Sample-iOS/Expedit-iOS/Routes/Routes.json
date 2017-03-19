@@ -1,0 +1,23 @@
+{
+    "Article": {
+        "URI": "article/:articleId",
+        "requirements": {
+            "articleId": "\\d+"
+        },
+        "controller": "ArticleVC"
+    },
+    "List": {
+        "URI": "list/:filter?",
+        "requirements": {
+            "filter": "true|plip"
+        },
+        "controller": "ListVC"
+    },
+    "Credit": {
+        "URI": "credit",
+        "controller": "CreditVC"
+    },
+    "Manual": {
+        "URI": "manual"
+    }
+}
