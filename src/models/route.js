@@ -72,6 +72,14 @@ Route.prototype.getRegex = function () {
     return ('\/?' + regex + '\/?');
 };
 
+Route.prototype.getRegexForParameterName = function (name) {
+    var parameter = this.parameterArray.find(function (parameter) {
+        return parameter.name === name;
+    });
+
+    return (parameter || { regex: ".[^\/]*" }).regex;
+}
+
 Route.prototype.hasParameters = function () {
     return this.parameterArray.length > 0;
 }

@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function openLink(routeName, URI) {
+            var path = URI;
+            URI.split('/').forEach(function (component) {
+                if (component.indexOf(':') === 0) {
+                    var inputName = routeName + component;
+                    var value = document.querySelector('[name="' + inputName + '"]').value;
+                    if (value !== "") {
+                        path = path.replace(component, value);
+                    } else {
+                        path = path.slice(0, path.indexOf(component));
+                    }
+                }
+            });
+            console.log(path);
+            //window.open(path, '_blank');
+        }
+    </script>
+
+    <style>
+        .infos {
+            padding: 0 10px;
+        }
+
+        .input-group-addon {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="infos">
+        <h4>Expedit</h4>
+        <p>Open this page on your device to test your deeplink</p>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <%= routeArray.map(function (route) { return `
+            <tr>
+                <td>
+                    <div class="input-group">
+                        `+ route.URI.split("/").map(function (component) {
+                            if (component.indexOf(':') === 0) {
+                                return '<input class="form-control" placeholder="'+route.getRegexForParameterName(component.slice(1))+'" name="'+route.name+''+component+'" /><span class="input-group-addon">/</span>'
+                            } else {
+                                var style = route.hasParameters() ? "" : "width:100%";
+                                return '<span class="input-group-addon" style="'+style+'">'+component+'/</span>'
+                            }
+                        }).join(`
+                        `) +`
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="openLink('`+route.name+`', '`+route.URI+`')">Go!</button>
+                        </span>
+                    </div>
+                </td>
+            </tr>`;
+            }).join(`
+            `) %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
