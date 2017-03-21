@@ -21,8 +21,7 @@
                     }
                 }
             });
-            console.log(path);
-            //window.open(path, '_blank');
+            window.open(path, '_blank');
         }
     </script>
 
@@ -33,6 +32,16 @@
 
         .input-group-addon {
             text-align: left;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 0 10px 10px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -68,6 +77,10 @@
             `) %>
         </tbody>
     </table>
+
+    <div class="footer">
+        <%= new Date().toString() %>
+    </div>
 
 </body>
 
