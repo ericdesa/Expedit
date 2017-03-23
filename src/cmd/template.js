@@ -16,7 +16,7 @@ module.exports = {
     createFile: function (output) {
         if (output && typeof output === "string") {
             var inputPath = path.join(__dirname, '..', './templates/json/exmaple.json');
-            var outputPath = path.join(__dirname, '..', output);
+            var outputPath = path.resolve(process.cwd(), output)+'/';
             files.copyFile(inputPath, outputPath);
             log.success("template created at " + outputPath + ", have fun !");
         } else {

@@ -40,8 +40,8 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
         }
     }
 
-    var absoluteJsonFilePath = path.join(__dirname, '../..', jsonFilePath);
-    var absoluteOutputPath = path.join(__dirname, '../..', outputDirectory);
+    var absoluteJsonFilePath = path.resolve(process.cwd(), jsonFilePath);
+    var absoluteOutputPath = path.resolve(process.cwd(), outputDirectory) + '/';
 
     fs.readFile(absoluteJsonFilePath, 'utf8', function (err, data) {
         if (err) {
