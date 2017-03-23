@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* jslint node: true, es6, this */
 "use strict";
 
