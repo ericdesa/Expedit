@@ -1,5 +1,5 @@
 {
-  "name": "expedit-router",
+  "name": "expedit",
   "version": "0.0.1",
   "description": "iOS Router builder",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "swift"
   ],
   "bin": {
-    "expedit-router": "./index.js"
+    "expedit": "./index.js"
   },
   "author": "Eric De Sa",
   "license": "Beerware",
