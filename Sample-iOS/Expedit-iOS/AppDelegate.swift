@@ -11,5 +11,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RouteManager.setDebugMode(.verbose)
         return true
     }
+    
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return RouteManager.open(url: url)
+    }
 }
 
