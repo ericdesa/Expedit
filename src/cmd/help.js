@@ -3,6 +3,7 @@
 
 // libs
 var CLI = require('clui'),
+    chalk = require('chalk'),
     clc = require('cli-color'),
     _ = require('lodash');
 
@@ -12,29 +13,57 @@ var CLI = require('clui'),
 
 module.exports = {
     print: function () {
-        var Line = CLI.Line;
 
-        var header = new Line()
-            .column('Parameter', 15, [clc.cyan])
-            .column('Description', 85, [clc.cyan])
-            .output();
+        test("build",
+            "create the router files",
+            [
+                "$expedit build --input ./Router.json (build swift routes in the current directory)",
+                "$expedit build --input ./Router.json --output ./Routes/ (build swift routes in another directory)",
+                "$expedit build --input ./Router.json --scheme expedit (build swift routes with deeplink support)",
+                "$expedit build --input ./Router.json --scheme expedit --language html (build deeplink html doc)",
+            ],
+            [
+                ["--input", "the path to the json file"],
+                ["--language", "swift, html (optional, swift by default)"],
+                ["--output", "the output directory (optional)"],
+                ["--scheme", "the app url scheme name used for the deeplink (optional)"]
+            ]);
 
-        var commands = [
-            ["--language", "swift, objc, html"],
-            ["--template", "create a json template (ex. ./assets/router.json)"],
-            ["--input", "the router json (ex. ./assets/router.json)"],
-            ["--output", "the output directory (ex. ./models/router)"],
-            ["--help", "show this (thank you captain obvious)"]
-        ];
+        test("template",
+            "create a Router.json example file",
+            [
+                "$expedit template"
+            ],
+            [
+                ["--output", "the output directory (optional)"],
+            ]);
 
-        _.forEach(commands, function (item) {
-            var param = item[0];
-            var desc = item[1];
+        function test(command, description, examples, parameters) {
+            var Line = CLI.Line;
+            new Line().output();
 
-            new Line()
-                .column(param, 15)
-                .column(desc, 85)
-                .output();
-        });
+            console.log(chalk.cyan.bold(command));
+
+            console.log('  ' + chalk.white.underline('usage:'));
+            console.log('  ' + chalk.white(description));
+
+            new Line().output();
+            console.log('  ' + chalk.white.underline('parameters:'));
+            _.forEach(parameters, function (item) {
+                var param = '  ' + item[0];
+                var desc = '  ' + item[1];
+
+                new Line()
+                    .column(param, 15)
+                    .column(desc, 85)
+                    .output();
+            });
+
+            new Line().output();
+            console.log('  ' + chalk.white.underline('examples:'));
+            _.forEach(examples, function (item) {
+                console.log('  ' + chalk.white(item));
+            })
+        }
     }
 }
