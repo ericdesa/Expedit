@@ -14,13 +14,15 @@ var path = require('path');
 
 module.exports = {
     createFile: function (output) {
+        var inputPath = path.join(__dirname, '..', './templates/json/Router.json');
+        var outputPath;
         if (output && typeof output === "string") {
-            var inputPath = path.join(__dirname, '..', './templates/json/exmaple.json');
-            var outputPath = path.resolve(process.cwd(), output) + '/';
-            files.copyFile(inputPath, outputPath);
-            log.success("template created at " + outputPath + ", have fun !");
+            outputPath = path.resolve(process.cwd(), output) + '/';
         } else {
-            log.error("output parameter is missing");
+            outputPath = path.resolve(process.cwd()) + '/';
         }
+
+        files.copyFile(inputPath, outputPath);
+        log.success("template created at " + outputPath + "");
     }
 };
