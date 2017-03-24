@@ -11,7 +11,7 @@ class _<%= route.fileName %>: Route {
     <%= route.parameterArray.map(function (param) { return 'var ' + param.name + ': String?' }).join(`
     `) %>
     <% if (route.hasParameters()) { %>
-    init(<%= route.parameterArray.map(function (param) { return param.name + ': String?' }).join(', ') %>) {
+    init(<%= route.parameterArray.map(function (param) { return param.name + ': String? = nil' }).join(', ') %>) {
         super.init()
         <%= route.parameterArray.map(function (param) { return 'self.' + param.name + ' = ' + param.name }).join(`
         `) %>
