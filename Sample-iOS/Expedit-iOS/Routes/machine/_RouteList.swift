@@ -10,7 +10,7 @@ class _RouteList: Route {
 
     var filter: String?
     
-    init(filter: String?) {
+    init(filter: String? = nil) {
         super.init()
         self.filter = filter
     }

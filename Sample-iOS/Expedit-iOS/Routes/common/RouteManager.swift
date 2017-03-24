@@ -33,6 +33,16 @@ class RouteManager {
         }
     }
 
+    class func open(url: URL) -> Bool {
+        if url.scheme == "expedit" {
+            let path = url.absoluteString.replacingOccurrences(of: "\(url.scheme!)://", with: "")
+            return RouteManager.open(path: path)
+        } else {
+            printDebug("the scheme is not recognized on \(url)")
+            return false
+        }
+    }
+
     class func findRoute(_ path: String) -> Route? {
         let allRoutes: [RouteProtocol.Type] = [
             RouteArticle.self,

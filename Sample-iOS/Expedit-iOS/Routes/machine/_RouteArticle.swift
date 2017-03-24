@@ -10,7 +10,7 @@ class _RouteArticle: Route {
 
     var articleId: String?
     
-    init(articleId: String?) {
+    init(articleId: String? = nil) {
         super.init()
         self.articleId = articleId
     }
