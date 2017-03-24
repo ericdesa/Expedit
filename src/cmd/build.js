@@ -21,7 +21,7 @@ var fs = require('fs'),
 // build implementation
 // -----------------------------
 
-function build(jsonFilePath, outputDirectory, language = "swift") {
+function build(jsonFilePath, outputDirectory, language = "swift", scheme = undefined) {
     if (jsonFilePath === undefined) {
         log.error("--input parameter is missing");
     } else if (outputDirectory === undefined) {
@@ -57,8 +57,8 @@ function build(jsonFilePath, outputDirectory, language = "swift") {
                 });
 
                 switch (language) {
-                    case "swift": new SwiftBuilder(absoluteOutputPath, routeArray); break;
-                    case "html": new HtmlBuilder(absoluteOutputPath, routeArray); break;
+                    case "swift": new SwiftBuilder(absoluteOutputPath, routeArray, scheme); break;
+                    case "html": new HtmlBuilder(absoluteOutputPath, routeArray, scheme); break;
                 }
             } catch (error) {
                 log.error("An error occured : " + error);

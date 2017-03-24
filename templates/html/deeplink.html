@@ -21,7 +21,9 @@
                     }
                 }
             });
-            window.open(path, '_blank');
+
+            var deeplink = '<%= scheme %>://' + path;
+            window.open(deeplink);
         }
     </script>
 

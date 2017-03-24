@@ -33,6 +33,16 @@ class RouteManager {
         }
     }
 
+    class func open(url: URL) -> Bool {
+        if url.scheme == "<%= scheme %>" {
+            let path = url.absoluteString.stringByReplaceingOccurence(of: "\(url.scheme!)://", with: "")
+            return route.open(path: )
+        } else {
+            printDebug("the scheme is not recognized on \(url)")
+            return false
+        }
+    }
+
     class func findRoute(_ path: String) -> Route? {
         let allRoutes: [RouteProtocol.Type] = [
             <%= routeArray.map(function (route) { return route.fileName + '.self' }).join(`,

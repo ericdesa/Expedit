@@ -8,8 +8,8 @@ var generateFilesInTemplateDirectory = require('./commonBuilder');
 // builder implementation
 // -----------------------------
 
-function HtmlBuilder(outputDirectory, routeArray) {
-    generateFilesInTemplateDirectory(outputDirectory, routeArray, 'html', 'html');
+function HtmlBuilder(outputDirectory, routeArray, scheme) {
+    generateFilesInTemplateDirectory(outputDirectory, routeArray, scheme, 'html', 'html');
 }
 
 module.exports = HtmlBuilder;

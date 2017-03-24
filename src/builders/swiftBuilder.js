@@ -14,9 +14,9 @@ var fs = require("fs"),
 // builder implementation
 // -----------------------------
 
-function SwiftBuilder(outputDirectory, routeArray) {
+function SwiftBuilder(outputDirectory, routeArray, scheme) {
     var previousFilePathArray = this.getPreviousFilePathArray(outputDirectory);
-    var newFilePathArray = generateFilesInTemplateDirectory(outputDirectory, routeArray, 'swift', 'swift');
+    var newFilePathArray = generateFilesInTemplateDirectory(outputDirectory, routeArray, scheme, 'swift', 'swift');
     this.deleteObsoleteFiles(previousFilePathArray, newFilePathArray);
 }
 

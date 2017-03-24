@@ -41,7 +41,7 @@ process.env.version = version;
 
 if (argv.help) help.print();
 else if (argv.template) template.createFile(argv.template);
-else if (argv.input || argv.output) build(argv.input, argv.output, argv.language);
+else if (argv.input || argv.output) build(argv.input, argv.output, argv.language, argv.scheme);
 else help.print();
 
 new CLI.Line().output();

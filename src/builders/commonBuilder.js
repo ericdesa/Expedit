@@ -14,7 +14,7 @@ var path = require('path'),
 // builder implementation
 // -----------------------------
 
-function generateFile(inputPath, targetPath, routeArray, route = undefined) {
+function generateFile(inputPath, targetPath, routeArray, route = undefined, scheme = undefined) {
     var fileName = files.fileNameFromPath(targetPath);
     var isHumanFile = route !== undefined && fileName.indexOf("_") === -1;
     var isTargetFileExist = fs.existsSync(targetPath);
@@ -24,6 +24,9 @@ function generateFile(inputPath, targetPath, routeArray, route = undefined) {
 
     if (route !== undefined) {
         parameter.route = route;
+    }
+    if (scheme !== undefined) {
+        parameter.scheme = scheme;
     }
 
     return files.readFile(inputPath).then(function (data) {
@@ -43,7 +46,7 @@ function generateFile(inputPath, targetPath, routeArray, route = undefined) {
     });
 }
 
-function generateFilesInTemplateDirectory(outputDirectory, routeArray, templateName, extension) {
+function generateFilesInTemplateDirectory(outputDirectory, routeArray, scheme, templateName, extension) {
     var rootPath = path.join(__dirname, '../../templates/' + templateName);
     var templateFilePathArray = files.findFilesInDir(rootPath, extension);
     var fileCreatedArray = [];
@@ -55,11 +58,11 @@ function generateFilesInTemplateDirectory(outputDirectory, routeArray, templateN
             _.forEach(routeArray, function (route) {
                 var targetRoutePath = targetPath.replace("{{routeName}}", "Route" + route.name);
                 fileCreatedArray.push(targetRoutePath);
-                generateFile(inputPath, targetRoutePath, routeArray, route);
+                generateFile(inputPath, targetRoutePath, routeArray, route, scheme);
             });
         } else {
             fileCreatedArray.push(targetPath);
-            generateFile(inputPath, targetPath, routeArray);
+            generateFile(inputPath, targetPath, routeArray, undefined, scheme);
         }
     });
 
