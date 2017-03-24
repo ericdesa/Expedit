@@ -21,7 +21,7 @@ var fs = require('fs'),
 // build implementation
 // -----------------------------
 
-function build(jsonFilePath, outputDirectory, language = "swift", scheme = undefined) {
+function build(jsonFilePath, outputDirectory, language = "swift", scheme = "") {
     if (jsonFilePath === undefined) {
         log.error("--input parameter is missing");
     } else {
@@ -48,7 +48,7 @@ function build(jsonFilePath, outputDirectory, language = "swift", scheme = undef
 
     fs.readFile(absoluteJsonFilePath, 'utf8', function (err, data) {
         if (err) {
-            log.error("json introuvable: " + absoluteJsonFilePath);
+            log.error("json not found at " + absoluteJsonFilePath);
         } else {
             try {
                 var json = JSON.parse(data);

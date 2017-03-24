@@ -35,13 +35,15 @@ console.log(
     chalk.yellow('=================== version', version, '===================')
 );
 
-
-var argv = parseArgs(process.argv);
 process.env.version = version;
 
-if (argv.help) help.print();
-else if (argv.template) template.createFile(argv.template);
-else if (argv.input || argv.output) build(argv.input, argv.output, argv.language, argv.scheme);
-else help.print();
+var command = process.argv[2]
+var argv = parseArgs(process.argv);
+
+switch (command) {
+    case "template": template.createFile(argv.output); break;
+    case "build": build(argv.input, argv.output, argv.language, argv.scheme); break;
+    default: help.print(); break;
+}
 
 new CLI.Line().output();
