@@ -24,8 +24,6 @@ var fs = require('fs'),
 function build(jsonFilePath, outputDirectory, language = "swift", scheme = undefined) {
     if (jsonFilePath === undefined) {
         log.error("--input parameter is missing");
-    } else if (outputDirectory === undefined) {
-        log.error("--output parameter is missing");
     } else {
         switch (language) {
             case "objc":
@@ -41,7 +39,12 @@ function build(jsonFilePath, outputDirectory, language = "swift", scheme = undef
     }
 
     var absoluteJsonFilePath = path.resolve(process.cwd(), jsonFilePath);
-    var absoluteOutputPath = path.resolve(process.cwd(), outputDirectory) + '/';
+    var absoluteOutputPath;
+    if (outputDirectory === undefined) {
+        absoluteOutputPath = path.parse(absoluteJsonFilePath).dir + '/';
+    } else {
+        absoluteOutputPath = path.resolve(process.cwd(), outputDirectory) + '/';
+    }
 
     fs.readFile(absoluteJsonFilePath, 'utf8', function (err, data) {
         if (err) {
