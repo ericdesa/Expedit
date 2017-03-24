@@ -84,7 +84,7 @@ class RouteManager {
     }
 
     internal class func printDebugVersion() -> Void {
-         print("Expedit Version : 0.0.3")
+         print("Expedit Version : 0.0.4")
     }
 
     internal class func printDebugAvailableURI() -> Void {

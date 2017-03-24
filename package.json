@@ -1,6 +1,6 @@
 {
   "name": "expedit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "iOS Router builder",
   "main": "index.js",
   "scripts": {
