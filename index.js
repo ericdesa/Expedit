@@ -21,19 +21,9 @@ var chalk = require('chalk'),
 clear();
 new CLI.Line().output();
 
-console.log(
-    chalk.yellow('=====================================================')
-);
-
-console.log(
-    chalk.yellow(
-        figlet.textSync('EXPEDIT', { horizontalLayout: 'full' })
-    )
-);
-
-console.log(
-    chalk.yellow('=================== version', version, '===================')
-);
+console.log('=====================================================');
+console.log(figlet.textSync('EXPEDIT', { horizontalLayout: 'full' }));
+console.log('=================== version', version, '===================');
 
 process.env.version = version;
 

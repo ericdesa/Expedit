@@ -1,5 +1,8 @@
 /* jslint node: true, es6, this */
-"use strict";
+'use strict';
+
+// inspired by : https://github.com/driftyco/ionic-cli/blob/690a447fbf87a592cae53551c25f23e2d9dd21c9/lib/utils/help.js
+
 
 // libs
 var CLI = require('clui'),
@@ -7,63 +10,105 @@ var CLI = require('clui'),
     clc = require('cli-color'),
     _ = require('lodash');
 
+// consts
+var rightColumnPosition = 30
+var indent = '  ';
 
-// help implementation
+
+// Tasks
 // -----------------------------
 
-module.exports = {
-    print: function () {
-
-        test("build",
-            "create the router files",
-            [
-                "$expedit build --input ./Router.json (build swift routes in the current directory)",
-                "$expedit build --input ./Router.json --output ./Routes/ (build swift routes in another directory)",
-                "$expedit build --input ./Router.json --scheme expedit (build swift routes with deeplink support)",
-                "$expedit build --input ./Router.json --scheme expedit --language html (build deeplink html doc)",
-            ],
-            [
-                ["--input", "the path to the json file"],
-                ["--language", "swift, html (optional, swift by default)"],
-                ["--output", "the output directory (optional)"],
-                ["--scheme", "the app url scheme name used for the deeplink (optional)"]
-            ]);
-
-        test("template",
-            "create a Router.json example file",
-            [
-                "$expedit template"
-            ],
-            [
-                ["--output", "the output directory (optional)"],
-            ]);
-
-        function test(command, description, examples, parameters) {
-            var Line = CLI.Line;
-            new Line().output();
-
-            console.log(chalk.cyan.bold(command));
-
-            console.log('  ' + chalk.white.underline('usage:'));
-            console.log('  ' + chalk.white(description));
-
-            new Line().output();
-            console.log('  ' + chalk.white.underline('parameters:'));
-            _.forEach(parameters, function (item) {
-                var param = '  ' + item[0];
-                var desc = '  ' + item[1];
-
-                new Line()
-                    .column(param, 15)
-                    .column(desc, 85)
-                    .output();
-            });
-
-            new Line().output();
-            console.log('  ' + chalk.white.underline('examples:'));
-            _.forEach(examples, function (item) {
-                console.log('  ' + chalk.white(item));
-            })
-        }
-    }
+function Task(name, usage, parameters) {
+    this.name = name;
+    this.usage = usage;
+    this.parameters = parameters;
 }
+
+Task.prototype.getCommandLine = function () {
+    var name = indent + this.name + indent;
+    var dots = '';
+
+    while ((name + dots).length < rightColumnPosition) {
+        dots += '.';
+    }
+
+    return chalk.green.bold(name) + chalk.grey(dots) + '  ' + chalk.bold(this.usage);
+};
+
+
+function Parameter(name, usage, isOptional = false) {
+    this.name = name;
+    this.usage = usage;
+    this.isOptional = isOptional;
+}
+
+Parameter.prototype.getParameterLine = function () {
+    var name = indent + indent + indent + this.name + indent;
+    var optional = this.isOptional ? ' ' + chalk.bold.yellow('(optional)') : '';
+    var dots = '';
+    while ((name + dots).length < rightColumnPosition) {
+        dots += '.';
+    }
+
+    return chalk.yellow.bold(name) + chalk.grey(dots) + indent + this.usage + optional;
+};
+
+
+// Setup
+// -----------------------------
+
+function getTasks() {
+    var taskArray = [];
+    taskArray.push(new Task(
+        'build',
+        'create the router files from a json description',
+        [
+            new Parameter('--input', 'the path to the json file', false),
+            new Parameter('--output', 'the output directory', true),
+            new Parameter('--scheme', 'the app url scheme name used for the deeplink', true),
+            new Parameter('--language', 'swift, html (swift by default)', true)
+        ]
+    ));
+
+    taskArray.push(new Task(
+        'template',
+        'create a Router.json example file',
+        [
+            new Parameter('--output', 'the output directory (the current one by default)', true)
+        ]
+    ));
+
+    return taskArray;
+}
+
+
+// Public
+// -----------------------------
+
+function print() {
+    var lines = [
+        '',
+        chalk.bold('Available tasks: '),
+        ''
+    ];
+
+    _.forEach(getTasks(), function (task) {
+        lines.push(task.getCommandLine());
+
+        _.forEach(task.parameters, function (parameter) {
+            lines.push(parameter.getParameterLine());
+        });
+
+        lines.push('');
+    });
+
+    _.forEach(lines, function (line) {
+        console.log(line);
+    });
+}
+
+
+// Export
+// -----------------------------
+
+module.exports = { print };
