@@ -17,13 +17,13 @@ npm install -g expedit
 ```
 build
   usage:
-  create the router files
+  create the router files from a json description
 
   parameters:
-  --input        the path to the json file
-  --language     swift, html (optional, swift by default)
-  --output       the output directory (optional)
-  --scheme       the app url scheme name used for the deeplink (optional)
+  --input  ...............  the path to the json file
+  --output  ..............  the output directory (optional)
+  --scheme  ..............  the app url scheme name used for the deeplink (optional)
+  --language  ............  swift, html (swift by default) (optional)
 
   examples:
   $expedit build --input ./Router.json (build swift routes in the current directory)
@@ -36,7 +36,7 @@ template
   create a Router.json example file
 
   parameters:
-  --output       the output directory (optional)
+  --output  ..............  the output directory (the current one by default) (optional)
 
   examples:
   $expedit template
