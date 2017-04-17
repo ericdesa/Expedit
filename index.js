@@ -2,10 +2,10 @@
 /* jslint node: true, es6, this */
 "use strict";
 
-// cmd
-var build = require('./src/cmd/build');
-var help = require('./src/cmd/help');
-var template = require('./src/cmd/template');
+// cli
+var build = require('./src/cli/build');
+var help = require('./src/cli/help');
+var template = require('./src/cli/template');
 var version = require('./package.json').version;
 
 // libs
