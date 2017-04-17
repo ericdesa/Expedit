@@ -50,7 +50,14 @@ template
 - [x] Deeplinking support
 - [x] Regex to resolve complexe parameters
 - [x] Automaticly create the associated ViewController from a storyboard
-- [ ] Multiple observers
+
+
+# TODO
+- implement multiple observers in the swift target
+- improve the ios sample app
+- prompt a confirmation message when obsolete files will be deleted
+- make a video
+- obj-c target
 
 
 # Contributors
