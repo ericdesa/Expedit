@@ -4,7 +4,15 @@ import UIKit
 class Route: NSObject {
 
     func open() -> Bool {
-        return RouteManager.open(route: self)
+        if self.canOpen() {
+            return RouteManager.open(route: self)
+        } else {
+            return false
+        }
+    }
+
+    func canOpen() -> Bool {
+        return true
     }
 
 }
