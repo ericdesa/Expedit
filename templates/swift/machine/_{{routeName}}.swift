@@ -1,6 +1,6 @@
 import UIKit
 
-class _<%= route.fileName %>: Route {
+class _<%= route.fileName %>: _Route {
 
     override var URI: String {
         get {
