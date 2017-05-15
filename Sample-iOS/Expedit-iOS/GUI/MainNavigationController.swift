@@ -20,6 +20,8 @@ class MainNavigationController: UINavigationController {
                 isRouteOpened = true
             }
             
+            print("customRouteFunction value:", route.customRouteFunction())
+            
             return isRouteOpened
         }
     }

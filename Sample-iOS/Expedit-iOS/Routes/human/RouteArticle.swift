@@ -6,4 +6,7 @@ class RouteArticle: _RouteArticle {
         return true
     }
     
+    override func customRouteFunction() -> Bool {
+        return true
+    }
 }

@@ -16,7 +16,7 @@ var path = require('path'),
 
 function generateFile(inputPath, targetPath, routeArray, route = undefined, scheme = undefined) {
     var fileName = files.fileNameFromPath(targetPath);
-    var isHumanFile = route !== undefined && fileName.indexOf("_") === -1;
+    var isHumanFile = (route !== undefined && fileName.indexOf("_") === -1) || fileName.indexOf("RouteHuman") !== -1;
     var isTargetFileExist = fs.existsSync(targetPath);
 
     var parameter = {};

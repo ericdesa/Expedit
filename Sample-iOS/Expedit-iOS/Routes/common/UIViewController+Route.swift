@@ -6,11 +6,11 @@ var routeEntryKey: UInt8 = 0 // We still need this boilerplate
 
 extension UIViewController {
 
-    var routeEntry: Route {
+    var routeEntry: RouteHuman {
 
         get {
-            return associatedObject(base: self, key: &routeEntryKey, initialiser: { () -> Route in
-                return Route()
+            return associatedObject(base: self, key: &routeEntryKey, initialiser: { () -> RouteHuman in
+                return RouteHuman()
             })
         }
         set {
@@ -18,7 +18,7 @@ extension UIViewController {
         }
     }
 
-    class func loadFromStoryboard(withRoute route: Route, andStoryboardName storyboardName: String = "Main") -> UIViewController {
+    class func loadFromStoryboard(withRoute route: RouteHuman, andStoryboardName storyboardName: String = "Main") -> UIViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
 
         let className = NSStringFromClass(self)

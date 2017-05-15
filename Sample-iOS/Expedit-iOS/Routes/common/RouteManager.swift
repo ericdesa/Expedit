@@ -4,7 +4,7 @@ class RouteManager {
 
     //MARK - Callback
 
-    typealias RouteCallback = (Route) -> Bool
+    typealias RouteCallback = (RouteHuman) -> Bool
 
     static var observerArray: [RouteCallback] = []
 
@@ -12,7 +12,7 @@ class RouteManager {
         RouteManager.observerArray.append(callback)
     }
 
-    class func open(route: Route) -> Bool {
+    class func open(route: RouteHuman) -> Bool {
         for (index, callback) in RouteManager.observerArray.enumerated() {
             if callback(route) {
                 printDebug("\(route.path()) has been used by the callback \(index)")
@@ -43,7 +43,7 @@ class RouteManager {
         }
     }
 
-    class func findRoute(_ path: String) -> Route? {
+    class func findRoute(_ path: String) -> RouteHuman? {
         let allRoutes: [RouteProtocol.Type] = [
             RouteArticle.self,
             RouteList.self,
@@ -51,11 +51,11 @@ class RouteManager {
             RouteManual.self
             ];
 
-        var findedRoute: Route?
+        var findedRoute: RouteHuman?
 
         for route in allRoutes {
             if route.isMatching(path: path) {
-                findedRoute = (route as! NSObject.Type).init() as? Route
+                findedRoute = (route as! NSObject.Type).init() as? RouteHuman
                 break
             }
         }
@@ -84,7 +84,7 @@ class RouteManager {
     }
 
     internal class func printDebugVersion() -> Void {
-         print("Expedit Version : 0.0.6")
+         print("Expedit Version : 0.0.7")
     }
 
     internal class func printDebugAvailableURI() -> Void {

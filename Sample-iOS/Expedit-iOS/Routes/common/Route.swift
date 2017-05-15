@@ -5,7 +5,7 @@ class Route: NSObject {
 
     func open() -> Bool {
         if self.canOpen() {
-            return RouteManager.open(route: self)
+            return RouteManager.open(route: (self as! RouteHuman))
         } else {
             return false
         }
