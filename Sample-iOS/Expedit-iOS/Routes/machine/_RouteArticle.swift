@@ -1,6 +1,6 @@
 import UIKit
 
-class _RouteArticle: Route {
+class _RouteArticle: _Route {
 
     override var URI: String {
         get {
