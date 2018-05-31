@@ -8,7 +8,7 @@ class RouteManager {
 
     static var observerArray: [RouteCallback] = []
 
-    class func addObserver(_ callback : @escaping RouteCallback) -> Void {
+    class func addObserver(_ callback : @escaping RouteCallback) {
         RouteManager.observerArray.append(callback)
     }
 
@@ -47,7 +47,7 @@ class RouteManager {
         let allRoutes: [RouteProtocol.Type] = [
             <%= routeArray.map(function (route) { return route.fileName + '.self' }).join(`,
             `) %>
-            ];
+            ]
 
         var findedRoute: RouteHuman?
 
@@ -81,15 +81,15 @@ class RouteManager {
         }
     }
 
-    internal class func printDebugVersion() -> Void {
+    internal class func printDebugVersion() {
          print("Expedit Version : <%= process.env.version %>")
     }
 
-    internal class func printDebugAvailableURI() -> Void {
+    internal class func printDebugAvailableURI() {
         let routes: [String] = [
             <%= routeArray.map(function (route) { return '"'+route.URI+'"' }).join(`,
             `) %>
-            ];
+            ]
 
         printDebug(routes.joined(separator: "\n"))
     }

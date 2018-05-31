@@ -5,7 +5,7 @@ class Route: NSObject {
 
     func open() -> Bool {
         if self.canOpen() {
-            return RouteManager.open(route: (self as! RouteHuman))
+            return RouteManager.open(route: (self as? RouteHuman)!)
         } else {
             return false
         }
@@ -32,7 +32,7 @@ extension Route: RouteProtocol {
         return false
     }
 
-    func setParameters(fromPath path: String) -> Void {
+    func setParameters(fromPath path: String) {
     }
 
     func path() -> String {

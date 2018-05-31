@@ -3,9 +3,7 @@ import UIKit
 class _<%= route.fileName %>: RouteHuman {
 
     override var URI: String {
-        get {
-            return "<%= route.URI %>"
-        }
+        return "<%= route.URI %>"
     }
 
     <%= route.parameterArray.map(function (param) { return 'var ' + param.name + ': String?' }).join(`
@@ -19,7 +17,7 @@ class _<%= route.fileName %>: RouteHuman {
 
     <% if (route.controller !== undefined) { %>
     override func viewController() -> UIViewController? {
-        return <%= route.controller %>.loadFromStoryboard(withRoute: self);
+        return <%= route.controller %>.loadFromStoryboard(withRoute: self)
     }
     <% } %>
     override class func isMatching(path: String) -> Bool {
@@ -30,7 +28,7 @@ class _<%= route.fileName %>: RouteHuman {
         return isMatching
     }
     <% if (route.hasParameters()) { %>
-    override func setParameters(fromPath path: String) -> Void {
+    override func setParameters(fromPath path: String) {
         let componentArray = path.components(separatedBy: "/")
         <%= route.parameterArray.map(function (param) { return 'self.' + param.name + ' = componentArray[' + param.uriIndex + ']' }).join(`
         `) %>
@@ -44,7 +42,7 @@ class _<%= route.fileName %>: RouteHuman {
         path = path
             .replacingOccurrences(of: "?", with: "")
             .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
-            .joined(separator: "/");
+            .joined(separator: "/")
         <% } else { %>let path = self.URI<% } %>
         return path
     }
