@@ -1,5 +1,3 @@
-# /!\ WORK IN PROGRESS /!\
-
 # Expedit what ?
 
 Route builder for iOS
@@ -45,7 +43,7 @@ template
 
 # Features
 
-- [x] Export Swift 3
+- [x] Export Swift 4
 - [x] Export HTML to test deeplink
 - [x] Deeplinking support
 - [x] Regex to resolve complexe parameters
