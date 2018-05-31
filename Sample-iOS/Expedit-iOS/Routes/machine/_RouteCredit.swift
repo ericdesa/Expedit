@@ -3,9 +3,7 @@ import UIKit
 class _RouteCredit: RouteHuman {
 
     override var URI: String {
-        get {
-            return "credit"
-        }
+        return "credit"
     }
 
     
@@ -13,7 +11,7 @@ class _RouteCredit: RouteHuman {
 
     
     override func viewController() -> UIViewController? {
-        return CreditVC.loadFromStoryboard(withRoute: self);
+        return CreditVC.loadFromStoryboard(withRoute: self)
     }
     
     override class func isMatching(path: String) -> Bool {

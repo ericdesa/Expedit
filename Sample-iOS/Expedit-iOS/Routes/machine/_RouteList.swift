@@ -3,9 +3,7 @@ import UIKit
 class _RouteList: RouteHuman {
 
     override var URI: String {
-        get {
-            return "list/:filter?"
-        }
+        return "list/:filter?"
     }
 
     var filter: String?
@@ -17,7 +15,7 @@ class _RouteList: RouteHuman {
 
     
     override func viewController() -> UIViewController? {
-        return ListVC.loadFromStoryboard(withRoute: self);
+        return ListVC.loadFromStoryboard(withRoute: self)
     }
     
     override class func isMatching(path: String) -> Bool {
@@ -28,7 +26,7 @@ class _RouteList: RouteHuman {
         return isMatching
     }
     
-    override func setParameters(fromPath path: String) -> Void {
+    override func setParameters(fromPath path: String) {
         let componentArray = path.components(separatedBy: "/")
         self.filter = componentArray[1]
     }
@@ -40,7 +38,7 @@ class _RouteList: RouteHuman {
         path = path
             .replacingOccurrences(of: "?", with: "")
             .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
-            .joined(separator: "/");
+            .joined(separator: "/")
         
         return path
     }

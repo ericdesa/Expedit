@@ -3,9 +3,7 @@ import UIKit
 class _RouteArticle: RouteHuman {
 
     override var URI: String {
-        get {
-            return "article/:articleId"
-        }
+        return "article/:articleId"
     }
 
     var articleId: String?
@@ -17,7 +15,7 @@ class _RouteArticle: RouteHuman {
 
     
     override func viewController() -> UIViewController? {
-        return ArticleVC.loadFromStoryboard(withRoute: self);
+        return ArticleVC.loadFromStoryboard(withRoute: self)
     }
     
     override class func isMatching(path: String) -> Bool {
@@ -28,7 +26,7 @@ class _RouteArticle: RouteHuman {
         return isMatching
     }
     
-    override func setParameters(fromPath path: String) -> Void {
+    override func setParameters(fromPath path: String) {
         let componentArray = path.components(separatedBy: "/")
         self.articleId = componentArray[1]
     }
@@ -40,7 +38,7 @@ class _RouteArticle: RouteHuman {
         path = path
             .replacingOccurrences(of: "?", with: "")
             .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
-            .joined(separator: "/");
+            .joined(separator: "/")
         
         return path
     }

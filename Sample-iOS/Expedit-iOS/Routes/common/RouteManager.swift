@@ -8,7 +8,7 @@ class RouteManager {
 
     static var observerArray: [RouteCallback] = []
 
-    class func addObserver(_ callback : @escaping RouteCallback) -> Void {
+    class func addObserver(_ callback : @escaping RouteCallback) {
         RouteManager.observerArray.append(callback)
     }
 
@@ -49,7 +49,7 @@ class RouteManager {
             RouteList.self,
             RouteCredit.self,
             RouteManual.self
-            ];
+            ]
 
         var findedRoute: RouteHuman?
 
@@ -83,17 +83,17 @@ class RouteManager {
         }
     }
 
-    internal class func printDebugVersion() -> Void {
-         print("Expedit Version : 0.0.7")
+    internal class func printDebugVersion() {
+         print("Expedit Version : 0.0.8")
     }
 
-    internal class func printDebugAvailableURI() -> Void {
+    internal class func printDebugAvailableURI() {
         let routes: [String] = [
             "article/:articleId",
             "list/:filter?",
             "credit",
             "manual"
-            ];
+            ]
 
         printDebug(routes.joined(separator: "\n"))
     }
