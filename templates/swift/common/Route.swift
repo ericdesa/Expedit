@@ -1,7 +1,10 @@
 
 import UIKit
 
-class Route: NSObject {
+class Route: NSObject, RouteProtocol {
+    var URI: String {
+        return ""
+    }
 
     func open() -> Bool {
         if self.canOpen() {
@@ -15,14 +18,8 @@ class Route: NSObject {
         return true
     }
 
-}
-
-extension Route: RouteProtocol {
-    var URI: String {
-        get {
-            return ""
-        }
-    }
+    
+    // MARK: - <RouteProtocol>
 
     func viewController() -> UIViewController? {
         return nil
