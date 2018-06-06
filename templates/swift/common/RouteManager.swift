@@ -53,7 +53,7 @@ class RouteManager {
 
         for route in allRoutes {
             if route.isMatching(path: path) {
-                findedRoute = (route as! NSObject.Type).init() as? RouteHuman
+                findedRoute = (route as? NSObject.Type)!.init() as? RouteHuman
                 break
             }
         }

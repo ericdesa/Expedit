@@ -25,9 +25,9 @@ extension UIViewController {
         let packageName = className.components(separatedBy: ".").first!
         let identifier = className.replacingOccurrences(of: "\(packageName).", with: "")
 
-        let vc = storyboard.instantiateViewController(withIdentifier: identifier)
-        vc.routeEntry = route
-        return vc
+        let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+        viewController.routeEntry = route
+        return viewController
     }
 }
 
