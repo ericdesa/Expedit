@@ -23,7 +23,7 @@ class _<%= route.fileName %>: RouteHuman {
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
         if let matchRange = path.range(of: "<%= route.regex.split('\\').join('\\\\') %>", options: .regularExpression) {
-            isMatching = !path.substring(with: matchRange).isEmpty
+            isMatching = !matchRange.isEmpty
         }
         return isMatching
     }
