@@ -15,9 +15,10 @@ function Route(name, json) {
 
     // parsed
     this.name = name;
-    this.URI = json.URI;
     this.controller = json.controller;
     this.parameterArray = [];
+    this.URI = json.URI;
+    if (this.URI.startsWith("/")) this.URI = this.URI.slice(1)
 
     // computed
     this.regex = "";
