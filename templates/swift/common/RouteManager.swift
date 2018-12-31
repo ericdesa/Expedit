@@ -2,7 +2,7 @@ import Foundation
 
 class RouteManager {
 
-    //MARK - Callback
+    // MARK: - Observers
 
     typealias RouteCallback = (RouteHuman) -> Bool
 
@@ -11,6 +11,9 @@ class RouteManager {
     class func addObserver(_ callback : @escaping RouteCallback) {
         RouteManager.observerArray.append(callback)
     }
+
+
+    // MARK: Helpers
 
     @discardableResult class func open(route: RouteHuman) -> Bool {
         for (index, callback) in RouteManager.observerArray.enumerated() {
@@ -61,7 +64,8 @@ class RouteManager {
         return findedRoute
     }
 
-    //MARK - Debug
+
+    // MARK: - Debug
 
     enum RouteDebugMode {
         case verbose
