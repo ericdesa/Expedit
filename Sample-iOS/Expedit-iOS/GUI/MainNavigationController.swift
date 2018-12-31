@@ -42,7 +42,7 @@ class MainNavigationController: UINavigationController {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Open", style: .default, handler: { (action) in
-            _ = RouteManager.open(path: inputTextField!.text!)
+            RouteManager.open(path: inputTextField!.text!)
         }))
         
         self.present(alert, animated: true, completion: nil)

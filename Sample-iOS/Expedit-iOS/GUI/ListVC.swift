@@ -6,11 +6,11 @@ import UIKit
 class ListVC: UIViewController {
 
     @IBAction func creditHandler(_ sender: Any) {
-        _ = RouteCredit().open()
+        RouteCredit().open()
     }
 
     @IBAction func manualHandler(_ sender: Any) {
-        _ = RouteManual().open()
+        RouteManual().open()
     }
     
 }
@@ -20,7 +20,7 @@ class ListVC: UIViewController {
 extension ListVC: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = RouteArticle(articleId: "\(indexPath.row)").open()
+        RouteArticle(articleId: "\(indexPath.row)").open()
     }
     
 }
