@@ -12,7 +12,7 @@ class RouteManager {
         RouteManager.observerArray.append(callback)
     }
 
-    class func open(route: RouteHuman) -> Bool {
+    @discardableResult class func open(route: RouteHuman) -> Bool {
         for (index, callback) in RouteManager.observerArray.enumerated() {
             if callback(route) {
                 printDebug("\(route.path()) has been used by the callback \(index)")
@@ -23,7 +23,7 @@ class RouteManager {
         return false
     }
 
-    class func open(path: String) -> Bool {
+    @discardableResult class func open(path: String) -> Bool {
         if let route = RouteManager.findRoute(path) {
             printDebug("\(route.self) match \(path)")
             return route.open()
@@ -33,7 +33,7 @@ class RouteManager {
         }
     }
 
-    class func open(url: URL) -> Bool {
+    @discardableResult class func open(url: URL) -> Bool {
         if url.scheme == "<%= scheme %>" {
             let path = url.absoluteString.replacingOccurrences(of: "\(url.scheme!)://", with: "")
             return RouteManager.open(path: path)
