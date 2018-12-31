@@ -1,6 +1,13 @@
 {
+    "Comments": {
+        "URI": "/article/:articleId/comments",
+        "requirements": {
+            "articleId": "\\d+"
+        },
+        "controller": "CommentsVC"
+    },
     "Article": {
-        "URI": "article/:articleId",
+        "URI": "article/:articleId/",
         "requirements": {
             "articleId": "\\d+"
         },

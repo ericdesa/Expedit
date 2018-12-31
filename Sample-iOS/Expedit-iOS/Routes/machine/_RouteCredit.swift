@@ -7,8 +7,8 @@ class _RouteCredit: RouteHuman {
     }
 
     
-    
 
+    
     
     override func viewController() -> UIViewController? {
         return CreditVC.loadFromStoryboard(withRoute: self)
@@ -17,7 +17,7 @@ class _RouteCredit: RouteHuman {
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
         if let matchRange = path.range(of: "/?credit/?", options: .regularExpression) {
-            isMatching = !path.substring(with: matchRange).isEmpty
+            isMatching = !matchRange.isEmpty
         }
         return isMatching
     }

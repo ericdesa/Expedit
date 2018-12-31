@@ -1,26 +1,26 @@
 import UIKit
 
-class _RouteList: RouteHuman {
+class _RouteComments: RouteHuman {
 
     override var URI: String {
-        return "list/:filter?"
+        return "article/:articleId/comments"
     }
 
-    var filter: String?
+    var articleId: String?
 
     
-    convenience init(filter: String? = nil) {
+    convenience init(articleId: String? = nil) {
         self.init()
-        self.filter = filter
+        self.articleId = articleId
     }
     
     override func viewController() -> UIViewController? {
-        return ListVC.loadFromStoryboard(withRoute: self)
+        return CommentsVC.loadFromStoryboard(withRoute: self)
     }
     
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
-        if let matchRange = path.range(of: "/?list(/true|plip)?/?", options: .regularExpression) {
+        if let matchRange = path.range(of: "/?article/\\d+/comments/?", options: .regularExpression) {
             isMatching = !matchRange.isEmpty
         }
         return isMatching
@@ -28,12 +28,12 @@ class _RouteList: RouteHuman {
     
     override func setParameters(fromPath path: String) {
         let componentArray = path.components(separatedBy: "/")
-        self.filter = componentArray[1]
+        self.articleId = componentArray[1]
     }
     
     override func path() -> String {
         var path = self.URI
-        if let filter = self.filter { path = path.replacingOccurrences(of: ":filter", with: filter) }
+        if let articleId = self.articleId { path = path.replacingOccurrences(of: ":articleId", with: articleId) }
 
         path = path
             .replacingOccurrences(of: "?", with: "")

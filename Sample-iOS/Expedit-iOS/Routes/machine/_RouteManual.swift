@@ -7,13 +7,13 @@ class _RouteManual: RouteHuman {
     }
 
     
-    
 
+    
     
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
         if let matchRange = path.range(of: "/?manual/?", options: .regularExpression) {
-            isMatching = !path.substring(with: matchRange).isEmpty
+            isMatching = !matchRange.isEmpty
         }
         return isMatching
     }

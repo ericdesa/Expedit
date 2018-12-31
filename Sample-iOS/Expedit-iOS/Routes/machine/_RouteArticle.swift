@@ -3,16 +3,16 @@ import UIKit
 class _RouteArticle: RouteHuman {
 
     override var URI: String {
-        return "article/:articleId"
+        return "article/:articleId/"
     }
 
     var articleId: String?
+
     
-    init(articleId: String? = nil) {
-        super.init()
+    convenience init(articleId: String? = nil) {
+        self.init()
         self.articleId = articleId
     }
-
     
     override func viewController() -> UIViewController? {
         return ArticleVC.loadFromStoryboard(withRoute: self)
@@ -21,7 +21,7 @@ class _RouteArticle: RouteHuman {
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
         if let matchRange = path.range(of: "/?article/\\d+/?", options: .regularExpression) {
-            isMatching = !path.substring(with: matchRange).isEmpty
+            isMatching = !matchRange.isEmpty
         }
         return isMatching
     }
