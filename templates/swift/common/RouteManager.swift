@@ -44,7 +44,7 @@ class RouteManager {
     }
 
     class func findRoute(_ path: String) -> RouteHuman? {
-        let allRoutes: [RouteProtocol.Type] = [
+        let allRoutes: [RouteHuman.Type] = [
             <%= routeArray.map(function (route) { return route.fileName + '.self' }).join(`,
             `) %>
             ]
@@ -53,7 +53,7 @@ class RouteManager {
 
         for route in allRoutes {
             if route.isMatching(path: path) {
-                findedRoute = (route as? NSObject.Type)!.init() as? RouteHuman
+                findedRoute = route.init(path: path)
                 break
             }
         }

@@ -8,13 +8,13 @@ class _<%= route.fileName %>: RouteHuman {
 
     <%= route.parameterArray.map(function (param) { return 'var ' + param.name + ': String?' }).join(`
     `) %>
+
     <% if (route.hasParameters()) { %>
-    init(<%= route.parameterArray.map(function (param) { return param.name + ': String? = nil' }).join(', ') %>) {
-        super.init()
+    convenience init(<%= route.parameterArray.map(function (param) { return param.name + ': String? = nil' }).join(', ') %>) {
+        self.init()
         <%= route.parameterArray.map(function (param) { return 'self.' + param.name + ' = ' + param.name }).join(`
         `) %>
     }<% } %>
-
     <% if (route.controller !== undefined) { %>
     override func viewController() -> UIViewController? {
         return <%= route.controller %>.loadFromStoryboard(withRoute: self)
