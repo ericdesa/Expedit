@@ -38,6 +38,17 @@ function Route(name, json) {
 }
 
 
+// Helpers
+// -----------------------------
+
+Route.prototype.regexWithOptionalSlashs = function (regex) {
+    var output = regex;
+    if (output.startsWith("/")) output = output.slice(1)
+    if (output.endsWith("/")) output = output.slice(0, -1)
+    return "/?" + output + "/?"
+}
+
+
 // Public
 // -----------------------------
 
@@ -45,6 +56,7 @@ Route.prototype.getRegex = function () {
     var self = this;
     var forceOptional = 0;
     var nbBraceToClose = 0;
+
     var regex = this.URI.split("/").map(function (component) {
         if (component.indexOf(":") === 0) {
             var name = component.replace(":", "").replace("?", "");
@@ -61,7 +73,7 @@ Route.prototype.getRegex = function () {
                 return '\/' + paramRegex;
             }
         } else {
-            return component;
+            return '\/' + component;
         }
     }).join('');
 
@@ -69,7 +81,7 @@ Route.prototype.getRegex = function () {
         regex += ')?';
     }
 
-    return ('\/?' + regex + '\/?');
+    return this.regexWithOptionalSlashs(regex)
 };
 
 Route.prototype.getRegexForParameterName = function (name) {
@@ -83,6 +95,5 @@ Route.prototype.getRegexForParameterName = function (name) {
 Route.prototype.hasParameters = function () {
     return this.parameterArray.length > 0;
 }
-
 
 module.exports = Route;
