@@ -1,4 +1,18 @@
-.vscode
+### Project ###
 node_modules
 output
-Sample-iOS/Expedit-iOS.xcodeproj/project.xcworkspace/xcuserdata/Eric.xcuserdatad/UserInterfaceState.xcuserstate
+
+### OSX ###
+.DS_Store
+
+### VisualStudioCode ###
+.vscode/*
+
+### Xcode ###
+xcuserdata/
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
