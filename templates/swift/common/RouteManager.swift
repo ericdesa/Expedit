@@ -18,7 +18,7 @@ class RouteManager {
     @discardableResult class func open(route: RouteHuman) -> Bool {
         for (index, callback) in RouteManager.observerArray.enumerated() {
             if callback(route) {
-                printDebug("\(route.path()) has been used by the callback \(index)")
+                printDebug("\(route.path) has been used by the callback \(index)")
                 return true
             }
         }

@@ -7,6 +7,10 @@
 ### Chore
 * replace the `UIViewController.loadFromStoryboard` extension with `Route.loadViewController` function
 
+### Breaking changes
+* replace the `Routable.viewController` function with a var
+* replace the `Routable.path` function with a var
+
 ## 0.0.10 (12-31-2018)
 
 #### Fix

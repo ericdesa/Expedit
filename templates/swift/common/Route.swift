@@ -3,11 +3,10 @@ import UIKit
 
 protocol Routable {
     var URI: String { get }
+    var path: String { get }
+    var viewController: UIViewController? { get }
 
-    func path() -> String
-    func viewController() -> UIViewController?
     func setParameters(fromPath path: String)
-
     static func isMatching(path: String) -> Bool
 }
 
@@ -16,18 +15,12 @@ class Route: Routable {
     // MARK: - <Routable>
 
     var URI: String { return "" }
+    var path: String { return "" }
+    var viewController: UIViewController? { return nil }
 
     required convenience init(path: String) {
         self.init()
         self.setParameters(fromPath: path)
-    }
-
-    func path() -> String {
-        return ""
-    }
-
-    func viewController() -> UIViewController? {
-        return nil
     }
 
     func setParameters(fromPath path: String) {
