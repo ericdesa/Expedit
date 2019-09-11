@@ -32,6 +32,7 @@
 		64728AAF21DA56E00053E497 /* _RouteCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64728AA321DA56E00053E497 /* _RouteCredit.swift */; };
 		64728AB021DA56E00053E497 /* _RouteComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64728AA421DA56E00053E497 /* _RouteComments.swift */; };
 		64728AB221DA56E00053E497 /* _RouteManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64728AA621DA56E00053E497 /* _RouteManual.swift */; };
+		648BCD742329471800BD63EB /* Credit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 648BCD732329471800BD63EB /* Credit.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		64728AA321DA56E00053E497 /* _RouteCredit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _RouteCredit.swift; sourceTree = "<group>"; };
 		64728AA421DA56E00053E497 /* _RouteComments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _RouteComments.swift; sourceTree = "<group>"; };
 		64728AA621DA56E00053E497 /* _RouteManual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _RouteManual.swift; sourceTree = "<group>"; };
+		648BCD732329471800BD63EB /* Credit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Credit.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				07E4EA0F1E72F94C0037F6AE /* Routes */,
 				07E4E9FD1E72F9450037F6AE /* AppDelegate.swift */,
 				07E4EA011E72F9450037F6AE /* Main.storyboard */,
+				648BCD732329471800BD63EB /* Credit.storyboard */,
 				07E4EA041E72F9450037F6AE /* Assets.xcassets */,
 				07E4EA061E72F9450037F6AE /* LaunchScreen.storyboard */,
 				07E4EA091E72F9450037F6AE /* Info.plist */,
@@ -194,7 +197,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Frianbiz;
 				TargetAttributes = {
 					07E4E9F91E72F9450037F6AE = {
@@ -206,7 +209,7 @@
 			};
 			buildConfigurationList = 07E4E9F51E72F9450037F6AE /* Build configuration list for PBXProject "Expedit-iOS" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -227,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				648BCD742329471800BD63EB /* Credit.storyboard in Resources */,
 				07E4EA081E72F9450037F6AE /* LaunchScreen.storyboard in Resources */,
 				076B3D791E7EF6DF00EF3483 /* Routes.json in Resources */,
 				07E4EA051E72F9450037F6AE /* Assets.xcassets in Resources */,

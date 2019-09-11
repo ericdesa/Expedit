@@ -54,8 +54,8 @@ template
 - [ ] implement multiple observers in the swift target
 - [ ] improve the ios sample app
 - [ ] prompt a confirmation message when obsolete files will be deleted
-- [ ] make a video
-- [ ] obj-c target
+- [ ] better doc
+- [ ] re-build in swift
 
 
 # Contributors

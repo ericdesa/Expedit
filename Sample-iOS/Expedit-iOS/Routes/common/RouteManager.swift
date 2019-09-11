@@ -18,7 +18,7 @@ class RouteManager {
     @discardableResult class func open(route: RouteHuman) -> Bool {
         for (index, callback) in RouteManager.observerArray.enumerated() {
             if callback(route) {
-                printDebug("\(route.path()) has been used by the callback \(index)")
+                printDebug("\(route.path) has been used by the callback \(index)")
                 return true
             }
         }
@@ -89,7 +89,7 @@ class RouteManager {
     }
 
     internal class func printDebugVersion() {
-         print("Expedit Version : 0.0.10")
+         print("Expedit Version : 0.0.11")
     }
 
     internal class func printDebugAvailableURI() {

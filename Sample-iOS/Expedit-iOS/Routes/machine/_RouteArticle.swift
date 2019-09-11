@@ -2,9 +2,24 @@ import UIKit
 
 class _RouteArticle: RouteHuman {
 
-    override var URI: String {
-        return "article/:articleId/"
+    override var URI: String { return "article/:articleId/" }
+
+    override var path: String {
+        var path = self.URI
+        if let articleId = self.articleId { path = path.replacingOccurrences(of: ":articleId", with: articleId) }
+
+        path = path
+            .replacingOccurrences(of: "?", with: "")
+            .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
+            .joined(separator: "/")
+        
+        return path
     }
+    
+    override var viewController: UIViewController? {
+        return self.loadViewController(fromIdentifier: "ArticleVC")
+    }
+    
 
     var articleId: String?
 
@@ -13,11 +28,6 @@ class _RouteArticle: RouteHuman {
         self.init()
         self.articleId = articleId
     }
-    
-    override func viewController() -> UIViewController? {
-        return ArticleVC.loadFromStoryboard(withRoute: self)
-    }
-    
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
         if let matchRange = path.range(of: "/?article/\\d+/?", options: .regularExpression) {
@@ -31,15 +41,4 @@ class _RouteArticle: RouteHuman {
         self.articleId = componentArray[1]
     }
     
-    override func path() -> String {
-        var path = self.URI
-        if let articleId = self.articleId { path = path.replacingOccurrences(of: ":articleId", with: articleId) }
-
-        path = path
-            .replacingOccurrences(of: "?", with: "")
-            .components(separatedBy: "/").filter({ (param) -> Bool in return param.range(of: ":") == nil })
-            .joined(separator: "/")
-        
-        return path
-    }
 }

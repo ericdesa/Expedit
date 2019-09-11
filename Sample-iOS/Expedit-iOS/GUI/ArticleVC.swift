@@ -7,7 +7,7 @@ class ArticleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLabel.text = self.routeEntry.path()
+        self.titleLabel.text = self.routeEntry.path
     }
     
     @IBAction func showCommentsHandler() {

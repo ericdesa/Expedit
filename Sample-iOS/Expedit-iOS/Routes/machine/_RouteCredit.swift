@@ -2,17 +2,20 @@ import UIKit
 
 class _RouteCredit: RouteHuman {
 
-    override var URI: String {
-        return "credit"
+    override var URI: String { return "credit" }
+
+    override var path: String {
+        let path = self.URI
+        return path
     }
+    
+    override var viewController: UIViewController? {
+        return self.loadViewController(fromIdentifier: "Credit.CreditVC")
+    }
+    
 
     
 
-    
-    
-    override func viewController() -> UIViewController? {
-        return CreditVC.loadFromStoryboard(withRoute: self)
-    }
     
     override class func isMatching(path: String) -> Bool {
         var isMatching = false
@@ -22,8 +25,4 @@ class _RouteCredit: RouteHuman {
         return isMatching
     }
     
-    override func path() -> String {
-        let path = self.URI
-        return path
-    }
 }

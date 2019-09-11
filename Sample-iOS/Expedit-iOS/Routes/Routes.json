@@ -22,7 +22,7 @@
     },
     "Credit": {
         "URI": "credit",
-        "controller": "CreditVC"
+        "controller": "Credit.CreditVC"
     },
     "Manual": {
         "URI": "manual"

@@ -13,7 +13,7 @@ class MainNavigationController: UINavigationController {
             var isRouteOpened = false
             
             // some routes build the VC for you ...
-            if let vc = route.viewController() {
+            if let vc = route.viewController {
                 self.pushViewController(vc, animated: true)
                 isRouteOpened = true
             }
