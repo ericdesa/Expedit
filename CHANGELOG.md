@@ -1,8 +1,15 @@
 # Changelog
 
-## 0.0.10 (2018-12-31)
+## 0.0.11 (09-11-2019)
+### Features
+* add the ability to specify a prefix on the `controller` field to be able to use multiple storyboard files (ex. `Post.DetailVC` will load the `DetailVC` of `Post.storyboard`)
 
-#### Bugfixes
+### Chore
+* replace the `UIViewController.loadFromStoryboard` extension with `Route.loadViewController` function
+
+## 0.0.10 (12-31-2018)
+
+#### Fix
 * opening a route from RouteManager.open(path: path) cause parameters to be lost ([#2](https://github.com/ericdesa/Expedit/issues/2))
 * Using RouteManager.open(path) make the app crash ([#3](https://github.com/ericdesa/Expedit/issues/3))
 * The generated regex are missing a "/" before parameter labels ([#4](https://github.com/ericdesa/Expedit/issues/4))

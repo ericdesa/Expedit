@@ -7,6 +7,6 @@
             "optionalParam3": "\\d{3}",
             "optionalParam4": "def"
         },
-        "controller": "MyViewController"
+        "controller": "Main.MyViewController"
     }
 }
