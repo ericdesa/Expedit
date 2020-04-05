@@ -22,7 +22,7 @@
     "clui": "0.3.6",
     "figlet": "1.2.1",
     "lodash": "4.17.13",
-    "minimist": "1.2.0",
+    "minimist": "1.2.3",
     "mkdirp": "0.5.1"
   },
   "devDependencies": {
